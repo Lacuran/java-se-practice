@@ -25,4 +25,5 @@ public class Exercise1SpeedConverter {
         printConversion(-1);
         printConversion(-10);
     }
+
 }
