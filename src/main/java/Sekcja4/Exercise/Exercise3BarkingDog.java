@@ -25,10 +25,10 @@ public class Exercise3BarkingDog {
     }
 
     public static void main(String[] args) {
-        shouldWakeUp(true,1);
-        shouldWakeUp(true,4);
-        shouldWakeUp(false,2);
-        shouldWakeUp(true,8);
-        shouldWakeUp(true,-1);
+        System.out.println(shouldWakeUp(true,1));
+        System.out.println(shouldWakeUp(true,4));
+        System.out.println(shouldWakeUp(false,2));
+        System.out.println(shouldWakeUp(true,8));
+        System.out.println(shouldWakeUp(true,-1));
     }
 }
