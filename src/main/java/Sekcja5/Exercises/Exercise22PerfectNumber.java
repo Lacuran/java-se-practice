@@ -14,4 +14,9 @@ public class Exercise22PerfectNumber {
         }
         return sum == number;
     }
+
+    public static void main(String[] args) {
+        System.out.println(isPerfectNumber(76));
+
+    }
 }

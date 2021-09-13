@@ -75,4 +75,11 @@ public class Exercise23NumberToWords {
         }
         return counter;
     }
+
+    public static void main(String[] args) {
+        numberToWords(234);
+        numberToWords(9322);
+        System.out.println(reverse(123));
+        System.out.println(getDigitCount(321));
+    }
 }

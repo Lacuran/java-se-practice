@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Button {
     public int height;
     public int width;
-    public String color;
-    public String fontType;
+    private String color;
+    private String fontType;
     public String text;
     public String animation;
     public boolean isVisible;
@@ -23,8 +23,20 @@ public class Button {
     }
 
     public void clickButton(int[] numberOfTimes){
-        System.out.println("Orgin of array: " + Arrays.toString(numberOfTimes));
+        System.out.println("Origin of array: " + Arrays.toString(numberOfTimes));
         numberOfTimes[1] = 1000;
         System.out.println("Updated array: " + Arrays.toString(numberOfTimes));
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color){
+        this.color = color;
+    }
+
+    public String getFontType(){
+        return fontType;
     }
 }

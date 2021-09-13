@@ -12,4 +12,8 @@ public class Exercise21AllFactors {
             }
         }
     }
+
+    public static void main(String[] args) {
+        printFactors(34);
+    }
 }
