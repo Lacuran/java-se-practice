@@ -1,4 +1,4 @@
-package Sekcja9.ChallengeAndExercise.Exercise47;
+package Sekcja9.Exercise.Exercise47;
 
 import java.util.ArrayList;
 import java.util.Scanner;

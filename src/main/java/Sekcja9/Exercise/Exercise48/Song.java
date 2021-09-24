@@ -1,4 +1,4 @@
-package Sekcja9.ChallengeAndExercise.Exercise48;
+package Sekcja9.Exercise.Exercise48;
 
 public class Song {
     private String title;
