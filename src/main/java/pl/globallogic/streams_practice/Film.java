@@ -97,12 +97,6 @@ public class Film {
 
     @Override
     public String toString() {
-        return "Film {" +
-                "title = '" + title + '\'' +
-                ", duration = " + duration +
-                " min, imdbRate = " + imdbRate +
-                ", genre = '" + genre + '\'' +
-                ", searchKeywords = " + searchKeywords +
-                '}';
+        return String.format("Film title: '%s', Main Actor: %s, Premiere: %s, duration: %s min, imdb Rate: %s, genre: '%s', Search Keywords: %s",title,mainActor,yearOfPremiere,duration,imdbRate,genre,searchKeywords);
     }
 }
