@@ -1,12 +1,13 @@
 package pl.globallogic.streams_practice;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilmProcessing {
 
     public static void main(String[] args) {
 
-        Collection<Film> movieList = new HashSet<>();
+        List<Film> movieList = new ArrayList<>();
         movieList.add(new Film("Constantine","Keanu Reeves",2005,121,7.0,"Fantasy", List.of("Keanu Reeves" , "Dark Fantasy", "WarnerBros", "Action movie")));
         movieList.add(new Film("The Flintstones","John Goodman",1994,91,4.9,"Family", List.of("Stones","Family movie","rock","bam bam")));
         movieList.add(new Film("The Lord of the Rings: The Fellowship of the Ring","Elijah Wood",2001,178,8.8,"Adventure", List.of("Adventure","Wizard","Ring","One does not simply walk into mordor","Fellowship")));
@@ -23,12 +24,21 @@ public class FilmProcessing {
         movieList.add(new Film("Love, Death & Robots","Scott Whyte",2019,20,8.5,"Action",List.of("Drama","Animation","Comedy","Shorts","Sci-fi")));
         movieList.add(new Film("Escape Room: Tournament of Champions","Taylor Russell",2021,88,5.8,"Horror",List.of("Action","Horror","Escape Room","Adventure","Dating Sim Simulator")));
 
-        int i = 1;
-        for (Film print:
-                movieList) {
-            String ranking = i + ". " + print;
-            System.out.println(ranking);
-            i++;
-        }
+
+
+        System.out.println("a) Movie list with specific duration:\n" + FilmFilters.movieDuration(movieList,120));
+        System.out.println("b) Movie List with uppercase title:\n" + FilmFilters.movieTitleToUpperCase(movieList) + "\n");
+        System.out.println("c) Movie list with filter by genre and imdb lower than specific value: \n" + FilmFilters.movieByGenreAndIMDb(movieList,"Action", 7.0));
+        System.out.println("d) First movie of particular genre: \n" + FilmFilters.movieByGenre(movieList,"Comedy"));
+        System.out.println("e) List of Movie by IMBd rate descending order: \n" + FilmFilters.IMDbRate(movieList));
+        System.out.println("f) List of top 3 movie by IMBd rate: \n" + FilmFilters.top3IMDbRate(movieList));
+        System.out.println("g) Total duration of watchlist in minutes: \n" + FilmFilters.totalWatchListDuration(movieList));
+        System.out.println("h) Longest movie in list: \n" + FilmFilters.longestMovie(movieList));
+        System.out.println("i) Return true if any of the films in a watch list satisfies criteria: \n" + FilmFilters.satisfiesCriteria(movieList,"Constantine","Dark"));
+        System.out.println("j) List of movie with common search Keyword: \n" + FilmFilters.commonSearchKeyword(movieList,"Animation"));
+        System.out.println("k) List by Main actor: \n" + FilmFilters.searchByActor(movieList, "Elijah Wood"));
+        System.out.println("Latest movie by year ascending: \n" + FilmFilters.movieListByYear(movieList,2018));
+        System.out.println("Sorted movie list by year: \n" + FilmFilters.sortedMovieListByYear(movieList));
+
     }
 }

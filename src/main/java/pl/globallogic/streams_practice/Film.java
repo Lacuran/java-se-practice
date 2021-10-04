@@ -26,6 +26,7 @@ For your custom film field from 2.f create 3 queries (filter, findAny/First, map
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Film {
     private String title;
@@ -46,10 +47,6 @@ public class Film {
         this.searchKeywords = searchKeywords;
     }
 
-    public void addSearchKeywords(String keyword){
-        this.searchKeywords.add(keyword);
-    }
-
     public List<String> getSearchKeywords() {
         return this.searchKeywords;
     }
@@ -58,45 +55,41 @@ public class Film {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getDuration() {
         return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public double getImdbRate() {
         return imdbRate;
     }
 
-    public void setImdbRate(double imdbRate) {
-        this.imdbRate = imdbRate;
-    }
-
     public String getGenre() {
         return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getMainActor() {
         return mainActor;
     }
 
-    public void setMainActor(String mainActor) {
-        this.mainActor = mainActor;
+    public int getYearOfPremiere() {
+        return yearOfPremiere;
     }
-
 
     @Override
     public String toString() {
-        return String.format("Film title: '%s', Main Actor: %s, Premiere: %s, duration: %s min, imdb Rate: %s, genre: '%s', Search Keywords: %s",title,mainActor,yearOfPremiere,duration,imdbRate,genre,searchKeywords);
+        return String.format("\tFilm title: '%s', Main Actor: %s, Premiere: %s, duration: %s min, imdb Rate: %s, genre: '%s', Search Keywords: %s\n",title,mainActor,yearOfPremiere,duration,imdbRate,genre,searchKeywords);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return yearOfPremiere == film.yearOfPremiere && duration == film.duration && Double.compare(film.imdbRate, imdbRate) == 0 && Objects.equals(title, film.title) && Objects.equals(mainActor, film.mainActor) && Objects.equals(genre, film.genre) && Objects.equals(searchKeywords, film.searchKeywords);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, mainActor, yearOfPremiere, duration, imdbRate, genre, searchKeywords);
     }
 }
