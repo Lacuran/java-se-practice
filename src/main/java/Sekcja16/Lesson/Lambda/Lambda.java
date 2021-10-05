@@ -1,9 +1,11 @@
 package Sekcja16.Lesson.Lambda;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Random;
+import java.util.function.*;
 
 public class Lambda {
 
@@ -14,7 +16,7 @@ public class Lambda {
         Employee jack = new Employee("Jack Daniels",21);
         Employee snow = new Employee("John Snow",65);
         Employee red = new Employee("Red mlem", 21);
-        Employee blue = new Employee("Im Blue", 32);
+        Employee blue = new Employee("Immma Blue", 32);
 
         List<Employee> employees = new ArrayList<>();
         employees.add(mark);
@@ -24,7 +26,49 @@ public class Lambda {
         employees.add(red);
         employees.add(blue);
 
-        Collections.sort(employees, (employee1, employee2) ->
+        Function<Employee, String> getLastName = (Employee employee) -> {
+            return employee.getName().substring(employee.getName().indexOf(' ') + 1);
+        };
+
+        String lastName = getLastName.apply(employees.get(1));
+        System.out.println(lastName);
+
+        Function<Employee, String> getFirstName = (Employee employee) -> {
+            return employee.getName().substring(0, employee.getName().indexOf(' '));
+        };
+
+        Random random1 = new Random();
+        for (Employee employee : employees){
+            if (random1.nextBoolean()){
+                System.out.println("First Name: " + getAName(getFirstName, employee));
+            } else {
+                System.out.println("Last Name: " + getAName(getLastName, employee));
+            }
+        }
+
+        Function<Employee, String> upperCase = employee -> employee.getName().toUpperCase();
+        Function<String, String> firstName = name -> name.substring(0, name.indexOf(' '));
+        Function chainedFunction = upperCase.andThen(firstName);
+
+        System.out.println(chainedFunction.apply(employees.get(0)));
+
+        BiFunction<String, Employee, String> concatAge = (String name, Employee employee) -> {
+            return  name.concat(" " + employee.getAge());
+        };
+
+        String upperName = upperCase.apply(employees.get(0));
+        System.out.println(concatAge.apply(upperName,employees.get(0)));
+
+        IntUnaryOperator incBy5 = i -> i + 5;
+        System.out.println(incBy5.applyAsInt(10));
+
+        Consumer<String> c1 = s -> s.toUpperCase();
+        Consumer<String> c2 = s -> System.out.println(s);
+        c1.andThen(c2).accept("Hello World");
+
+
+
+        /*Collections.sort(employees, (employee1, employee2) ->
                 employee1.getName().compareTo(employee2.getName()));
 
         System.out.println("\n*******************************\n");
@@ -43,35 +87,38 @@ public class Lambda {
 
         System.out.println("\n*******************************\n");
 
-        printEmployeesByAge(employees,"Employees over 30: ", employee -> employee.getAge() > 30);
-        printEmployeesByAge(employees,"\nEmployees 30 and under: ", employee -> employee.getAge() <=30);
+        printEmployeesByAge(employees,"Employees over 30: ", employee -> employee.getAge() > 40);
+        printEmployeesByAge(employees,"\nEmployees 30 and under: ", employee -> employee.getAge() <=40);
+        printEmployeesByAge(employees, "\nEmployees younger than 25", employee -> employee.getAge() <25);
 
+        System.out.println("\n*******************************\n");
 
-        /*for(Employee employee : employees){
-            if (employee.getAge() > 30){
-                System.out.println(employee.getName());
-            }
-        }*/
+        IntPredicate greaterThan15 = i -> i >15;
+        IntPredicate lessThan100 = i -> i < 100;
 
-//        String sillyString = doStringStuff(new UpperContact() {
-//            @Override
-//            public String upperAndConcat(String s1, String s2) {
-//                return s1.toUpperCase() + s2.toUpperCase();
-//            }
-//        },
-//                employees.get(0).getName(), employees.get(1).getName());
-//        System.out.println(sillyString);
+        System.out.println(greaterThan15.test(10));
+        int a = 20;
+        System.out.println(greaterThan15.test(a + 5));
+        System.out.println(greaterThan15.and(lessThan100).test(50));
+        System.out.println(greaterThan15.and(lessThan100).test(15));
 
-        /*UpperContact uc = (s1, s2) -> {
-            String result = s1.toUpperCase() + s2.toUpperCase();
-            return result;
-        };
-        String sillyString = doStringStuff(uc, employees.get(0).getName(), employees.get(1).getName());
-        System.out.println(sillyString);
+        Random random = new Random();
+        Supplier<Integer> randomSupplier = () -> random.nextInt(1000);
+        for (int i = 0; i < 10; i++) {
+            System.out.print(randomSupplier.get() + ", ");
+        }
 
-        AnotherClass anotherClass = new AnotherClass();
-        String s = anotherClass.doSomething();
-        System.out.println(s);*/
+        System.out.println("\n*******************************\n");
+
+        employees.forEach(employee -> {
+            String lastNAme = employee.getName().substring(employee.getName().indexOf(' ')+1);
+            System.out.println("Last name is: " + lastNAme);
+        });*/
+
+    }
+
+    private static String getAName(Function<Employee, String> getName, Employee employee){
+        return getName.apply(employee);
     }
 
     public final static String doStringStuff(UpperContact uc, String s1, String s2){
@@ -127,14 +174,5 @@ class AnotherClass {
         });
         System.out.println("The AnotherClass class's name is " + getClass().getSimpleName());
         return Lambda.doStringStuff(uc,"String1","String2");
-
-//        System.out.println("The AnotherClass class's name is: " + getClass().getSimpleName());
-//        return Lambda.doStringStuff(new UpperContact() {
-//            @Override
-//            public String upperAndConcat(String s1, String s2) {
-//                System.out.println("The anonymous class's name is:" + getClass().getSimpleName());
-//                return s1.toUpperCase() + s2.toUpperCase();
-//            }
-//        }, "String1", "String2");
     }
 }
