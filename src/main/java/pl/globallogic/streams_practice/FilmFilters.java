@@ -82,6 +82,4 @@ public class FilmFilters {
                 .sorted(Comparator.comparingInt(Film::getYearOfPremiere))
                 .collect(Collectors.toList());
     }
-
-
 }
